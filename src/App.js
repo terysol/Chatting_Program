@@ -1,8 +1,8 @@
 import React from "react";
 
-function Food({fav}){           // {fav} -> props.fav 똑같음
+function Food(props){           // {fav} -> props.fav 똑같음
 
-    return <h1> I like {fav} </h1>
+    return <h1> I like {props.fav} </h1>
 }
 
 function App() {
