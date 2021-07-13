@@ -21,7 +21,9 @@ function App() {
 // state, setState() 메서드를 통해서 state 값 변경
 class App1 extends Component{
     state={
-        count:0
+        count:0,
+        isLoading:true,
+        movies:[]
     };
     add =()=>{
         this.setState(cur=>({count:cur.count+1}))
@@ -30,15 +32,26 @@ class App1 extends Component{
         this.setState(cur=>({count:cur.count+1}));
     }
 
+    componentDidMount() {
+        setTimeout(()=>{
+            this.setState({isLoading:false});
+        },6000)
+    }
+
     render() {
         return(
             <div>
-                <h1>The number is : {this.state.count}</h1>
+                {/*<h1>The number is : {this.state.count}</h1>
                 <button onClick={this.add}>ADD</button>
-                <button onClick={this.minus}>MINUS</button>
+                <button onClick={this.minus}>MINUS</button>*/}
+
+                {this.state.isLoading ? "Loading..":"We are ready"}
             </div>
         )
     }
 }
 
 export default App;
+
+// render를 하면 호출되는 Life cycle -> componentDidMount
+// state를 선언하는건 필수가 아니다
