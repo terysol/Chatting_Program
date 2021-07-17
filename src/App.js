@@ -1,6 +1,7 @@
 import React from "react";
 import {Component} from "react";
 import axios from "axios";
+import Movie from "./movie"
 
 // function Food(props){           // {fav} -> props.fav 똑같음
 //
@@ -26,18 +27,32 @@ class App extends Component{
         movies:[]
     };
     getMovies = async ()=>{  // 함수가 비동기 , axios가 끝날 때까지 기다림
-        const movies = await axios.get("https://yts.mx/api/v2/list_movies.json")
+        const {
+            data:{
+                data:{movies}
+            }
+        }= await axios.get("https://yts.mx/api/v2/list_movies.json?sort_by=rating")
+        this.setState({movies,isLoading : false})
     }
     componentDidMount() {
         this.getMovies()
     }
 
     render() {
-        const{isLoading} = this.state;
+        const{isLoading,movies} = this.state;
         return(
 
             <div>
-                {this.state.isLoading ? "Loading..":"We are ready"}
+                {this.state.isLoading ? "Loading..":movies.map(movie =>{
+                    return <Movie
+                                key={movie.id}
+                                id={movie.id}
+                                  year={movie.year}
+                                  title = {movie.title}
+                                summary={movie.summary}
+                                poster={movie.medium_cover_image}
+                    />
+                })}
             </div>
         )
     }
