@@ -2,6 +2,7 @@ import React from "react";
 import {Component} from "react";
 import axios from "axios";
 import Movie from "./movie"
+import "./App.css"
 
 // function Food(props){           // {fav} -> props.fav 똑같음
 //
@@ -42,18 +43,26 @@ class App extends Component{
         const{isLoading,movies} = this.state;
         return(
 
-            <div>
-                {this.state.isLoading ? "Loading..":movies.map(movie =>{
-                    return <Movie
+            <section className="container">
+                {isLoading ? (
+                    <div className="loader">
+                        <span className="loader__text">Loading</span>
+                    </div>
+                ) : (
+                    <div className="movies">
+                        {movies.map(movie =>{
+                            return <Movie
                                 key={movie.id}
                                 id={movie.id}
-                                  year={movie.year}
-                                  title = {movie.title}
+                                year={movie.year}
+                                title = {movie.title}
                                 summary={movie.summary}
                                 poster={movie.medium_cover_image}
-                    />
-                })}
-            </div>
+                            />
+                        })}
+                    </div>
+                )}
+            </section>
         )
     }
 }
