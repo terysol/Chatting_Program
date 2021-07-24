@@ -30,3 +30,5 @@ Movie.propTypes={
 };
 
 export default Movie;
+
+// gh-pages -> github의 사이트 이름
